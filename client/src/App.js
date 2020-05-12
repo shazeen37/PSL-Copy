@@ -15,6 +15,7 @@ import Createprofile from './components/profile-form/Createprofile';
 import Editprofile from './components/profile-form/Editprofile';
 import Profiles from './components/profiles/Profiles';
 import Post from './components/Posts/Post-form';
+import upload from './components/Posts/upload';
 
 //Redux
 import { Provider } from 'react-redux';
@@ -58,7 +59,7 @@ const App = () => {
                 path='/edit-profile'
                 component={Editprofile}
               />
-              <PrivateRoute exact path='/PostForm' component={Post} />
+              <PrivateRoute exact path='/upload' component={upload} />
             </switch>
           </section>
         </Fragment>

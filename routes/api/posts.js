@@ -1,12 +1,13 @@
 const express = require('express');
-//const bodyParser = require('body-parser');
+const fileUpload = require('express-fileUpload');
+
 const router = express.Router();
+router.use(fileUpload());
 const { check, validationResult } = require('express-validator/check');
 const auth = require('../../middleware/auth');
 const Post = require('../../models/Posts');
 const Users = require('../../models/Users');
 const Profile = require('../../models/Profile');
-//const methodOverride = require('method-override');
 
 //@route Get api/post
 //desc Test route
@@ -25,8 +26,17 @@ router.post(
       const newPost = new Post({
         text: req.body.text,
         name: user.name,
+        video: req.files.file,
         avatar: user.avatar,
         user: req.user.id,
+      });
+
+      file.mv('${_dirname}/client/public/uploads/${file.name}', (err) => {
+        if (err) {
+          consloe.error(err);
+          return res.status(500).send(err);
+        }
+        res.json({ fileName: file.name, filePath: '/uploads/${file.name}' });
       });
 
       const post = await newPost.save();

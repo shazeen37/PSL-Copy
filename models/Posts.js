@@ -20,6 +20,11 @@ const PostSchema = new mongoose.Schema({
     type: String,
   },
 
+  video: {
+    type: Buffer,
+    required: true,
+  },
+
   likes: [
     {
       user: {
